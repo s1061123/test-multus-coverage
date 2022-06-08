@@ -32,12 +32,11 @@ jobs:
     - name: Test
       run: sudo ./hack/test-go.sh
 
-    - name: Send coverage
-      uses: shogo82148/actions-goveralls@v1
+    - name: upload coverage
+      uses: codecov/codecov-action@v1
       with:
-        path-to-profile: coverage.out
-        flag-name: Go-${{ matrix.go }}
-        parallel: true
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: ./coverage.out
 
   # notifies that all test jobs are finished.
   finish:
